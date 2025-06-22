@@ -1,66 +1,71 @@
 import { Button, Container, Grid, TextField, Typography } from "@mui/material";
-import Joi from "joi";
 import useForm from "../hooks/useForm";
+import {
+    containerStyle,
+    formTitleStyle,
+    largeFieldProps,
+    submitSectionStyle,
+} from "../styles/registerFormStyes";
+import axios from "axios";
+import { JOIObject } from "./registerFormJoiObj";
+import { registerDetailes } from "../interfaces/registerDetailes";
 
-function RegisterForm() {
-    const { formDetails, errors, handleChange, handleSubmit, isSubmit } = useForm(
-        {
-            firstName: "",
-            lastName: "",
-            middleName: "",
-            email: "",
-            phone: "",
-            password: "",
-        },
-        {
-            firstName: Joi.string().min(2).max(10).required().label("First Name"),
-            middleName: Joi.string().allow("").label("Middle Name").required(),
-            lastName: Joi.string().min(2).required().label("Last Name"),
-            email: Joi.string().email({ tlds: { allow: false } }).required().label("Email"),
-            phone: Joi.string()
-                .pattern(/^[0-9]{9,15}$/)
-                .required()
-                .label("Phone"),
-            password: Joi.string().min(9).pattern(/[A-Z]/).pattern(/[a-z]/).pattern(/[0-9]/).pattern(/[^a-zA-Z0-9]/)
-                .required()
-                .label("Password"),
-        }
-    );
 
-    // Style object for larger text fields
-    const largeFieldProps = {
-        InputProps: {
-            sx: {
-                fontSize: 24,
-                height: 68,
-                padding: "24px 18px",
-            }
+
+const handleSignup = async (userDetails) => {
+    const userDetailsForServer = {
+        name: {
+            first: userDetails.firstName,
+            middle: userDetails.middleName,
+            last: userDetails.lastName,
         },
-        InputLabelProps: {
-            sx: {
-                fontSize: 22,
-                top: "6px"
-            }
-        }
+        phone: userDetails.phone,
+        email: userDetails.email,
+        password: userDetails.password,
+        image: {
+            url: userDetails.url,
+            alt: userDetails.alt,
+        },
+        address: {
+            state: userDetails.state,
+            country: userDetails.country,
+            city: userDetails.city,
+            street: userDetails.street,
+            houseNumber: userDetails.houseNumber,
+            zip: userDetails.zip,
+        },
+        isBusiness: true,
     };
 
+    try {
+        const response = await axios.post(
+            "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users",
+            userDetailsForServer
+        );
+        console.log(response.data);
+    } catch (error) {
+        console.log(error);
+        if (error.response) {
+            alert(error.response.data);
+        }
+    }
+};
+
+function RegisterForm() {
+    const { formDetails, errors, handleChange, handleSubmit, handleCancel } = useForm(
+        handleSignup
+        , JOIObject
+        , registerDetailes
+    );
+
     return (
-        <Container
-            maxWidth="md"
-            sx={{
-                mt: 6,
-                p: 4,
-                bgcolor: "#f7fafd",
-                borderRadius: 4,
-                boxShadow: 4,
-            }}
-        >
-            <Typography variant="h3" mb={5} align="center" fontWeight="bold" letterSpacing={2}>
+        <Container maxWidth="md" sx={containerStyle}>
+            <Typography variant="h3" sx={formTitleStyle}>
                 REGISTER
             </Typography>
             <form autoComplete="off">
                 <Grid container spacing={3}>
-                    {/* First Name */}
+
                     <Grid item xs={12} sm={6}>
                         <TextField
                             fullWidth
@@ -74,7 +79,7 @@ function RegisterForm() {
                             {...largeFieldProps}
                         />
                     </Grid>
-                    {/* Middle Name */}
+
                     <Grid item xs={12} sm={6}>
                         <TextField
                             fullWidth
@@ -88,7 +93,7 @@ function RegisterForm() {
                             {...largeFieldProps}
                         />
                     </Grid>
-                    {/* Last Name */}
+
                     <Grid item xs={12} sm={6}>
                         <TextField
                             fullWidth
@@ -102,7 +107,7 @@ function RegisterForm() {
                             {...largeFieldProps}
                         />
                     </Grid>
-                    {/* Phone */}
+
                     <Grid item xs={12} sm={6}>
                         <TextField
                             fullWidth
@@ -116,7 +121,7 @@ function RegisterForm() {
                             {...largeFieldProps}
                         />
                     </Grid>
-                    {/* Email */}
+
                     <Grid item xs={12} sm={6}>
                         <TextField
                             fullWidth
@@ -130,7 +135,7 @@ function RegisterForm() {
                             {...largeFieldProps}
                         />
                     </Grid>
-                    {/* Password */}
+
                     <Grid item xs={12} sm={6}>
                         <TextField
                             fullWidth
@@ -145,39 +150,141 @@ function RegisterForm() {
                             {...largeFieldProps}
                         />
                     </Grid>
-                    {/* Buttons */}
-                    <Grid item xs={12} md={6}>
-                        <Button
+
+                    <Grid item xs={12} sm={6}>
+                        <TextField
                             fullWidth
-                            variant="outlined"
-                            color="error"
-                            sx={{ py: 2, fontSize: 20 }}
-                        >
-                            Cancel
-                        </Button>
+                            label="Image URL"
+                            name="url"
+                            value={formDetails.url}
+                            onChange={handleChange}
+                            error={Boolean(errors.url)}
+                            helperText={errors.url}
+                            autoComplete="url"
+                            {...largeFieldProps}
+                        />
                     </Grid>
-                    <Grid item xs={12} md={6}>
-                        <Button
+
+                    <Grid item xs={12} sm={6}>
+                        <TextField
                             fullWidth
-                            variant="contained"
-                            sx={{ py: 2, fontSize: 20 }}
-                            onClick={handleSubmit}
-                        >
-                            Submit
-                        </Button>
+                            label="Image Description"
+                            name="alt"
+                            value={formDetails.alt}
+                            onChange={handleChange}
+                            error={Boolean(errors.alt)}
+                            helperText={errors.alt}
+                            {...largeFieldProps}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth
+                            label="State"
+                            name="state"
+                            value={formDetails.state}
+                            onChange={handleChange}
+                            error={Boolean(errors.state)}
+                            helperText={errors.state}
+                            {...largeFieldProps}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth
+                            label="Country"
+                            name="country"
+                            value={formDetails.country}
+                            onChange={handleChange}
+                            error={Boolean(errors.country)}
+                            helperText={errors.country}
+                            {...largeFieldProps}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth
+                            label="City"
+                            name="city"
+                            value={formDetails.city}
+                            onChange={handleChange}
+                            error={Boolean(errors.city)}
+                            helperText={errors.city}
+                            {...largeFieldProps}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth
+                            label="Street"
+                            name="street"
+                            value={formDetails.street}
+                            onChange={handleChange}
+                            error={Boolean(errors.street)}
+                            helperText={errors.street}
+                            {...largeFieldProps}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth
+                            label="House Number"
+                            name="houseNumber"
+                            type="number"
+                            value={formDetails.houseNumber}
+                            onChange={handleChange}
+                            error={Boolean(errors.houseNumber)}
+                            helperText={errors.houseNumber}
+                            {...largeFieldProps}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth
+                            label="ZIP"
+                            name="zip"
+                            type="number"
+                            value={formDetails.zip}
+                            onChange={handleChange}
+                            error={Boolean(errors.zip)}
+                            helperText={errors.zip}
+                            {...largeFieldProps}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <Grid container spacing={3}>
+                            <Grid item xs={12} sm={6}>
+                                <Button
+                                    fullWidth
+                                    variant="outlined"
+                                    color="error"
+                                    sx={{ py: 2, fontSize: 20 }}
+                                    onClick={handleCancel}
+                                >
+                                    Cancel
+                                </Button>
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <Button
+                                    fullWidth
+                                    variant="contained"
+                                    sx={{ py: 2, fontSize: 20 }}
+                                    onClick={handleSubmit}
+                                >
+                                    Submit
+                                </Button>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
             </form>
-            {isSubmit && (
-                <Container sx={{ mt: 5, bgcolor: "#e3f2fd", py: 3, borderRadius: 2 }}>
-                    <Typography variant="h6" mb={1}>Form Data:</Typography>
-                    <Typography>First Name: {formDetails.firstName}</Typography>
-                    <Typography>Middle Name: {formDetails.middleName}</Typography>
-                    <Typography>Last Name: {formDetails.lastName}</Typography>
-                    <Typography>Email: {formDetails.email}</Typography>
-                    <Typography>Phone: {formDetails.phone}</Typography>
-                </Container>
-            )}
         </Container>
     );
 }

@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useCountries() {
@@ -7,11 +7,11 @@ export default function useCountries() {
 
     const getCountries = async () => {
         try {
-            let res = await axios.get("https://restcountries.com/v3.1/all");
+            let res = await axios.get("https://restcountries.com/v3.1/all?fields=name,flags,capital,region");
             setCountries(res.data)
             setFilCountries(res.data)
         } catch (err) {
-            console.log(err, "countries didnt load");
+            console.log(err.message, "countries didnt load");
         }
     }
 

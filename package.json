@@ -16,13 +16,14 @@
     "@mui/material": "^7.1.0",
     "axios": "^1.9.0",
     "joi": "^17.13.3",
+    "jwt-decode": "^4.0.0",
     "mui": "^0.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.25.0",
+    "@eslint/js": "^9.28.0",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",

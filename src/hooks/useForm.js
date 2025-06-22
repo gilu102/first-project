@@ -1,11 +1,12 @@
 import { useState } from "react";
 import Joi from "joi";
-export default function useForm(initialForm, schemaObj) {
-    const [formDetails, setFormDetails] = useState(initialForm);
-    const [errors, setErrors] = useState({});
-    const [isSubmit, setIsSubmit] = useState(false)
 
-    const schema = Joi.object(schemaObj);
+
+export default function useForm(onSubmit, initialform, formInitials) {
+    const [formDetails, setFormDetails] = useState(formInitials);
+    const [errors, setErrors] = useState({});
+
+    const schema = Joi.object(initialform);
 
     const handleChange = (e) => {
         const fieldName = e.target.name;
@@ -16,7 +17,7 @@ export default function useForm(initialForm, schemaObj) {
         }));
 
         const fieldSchema = Joi.object({
-            [fieldName]: schemaObj[fieldName],
+            [fieldName]: initialform[fieldName],
         });
 
         const { error } = fieldSchema.validate({ [fieldName]: fieldValue });
@@ -31,18 +32,24 @@ export default function useForm(initialForm, schemaObj) {
         }
     };
 
+
     const handleSubmit = () => {
         console.log(formDetails);
         const { error } = schema.validate(formDetails, { abortEarly: false });
         console.log(error);
-        setIsSubmit(true)
+        onSubmit(formDetails)
     };
+
+    function handleCancel() {
+        setFormDetails(formInitials);
+        setErrors({})
+    }
 
     return {
         formDetails,
         errors,
         handleChange,
         handleSubmit,
-        isSubmit,
+        handleCancel
     };
 }
