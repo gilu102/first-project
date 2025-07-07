@@ -4,7 +4,7 @@ import BCardsFooter from "./BCardsFooter";
 
 function BCard({ card }) {
     return (
-        <Card sx={{ Width: 250, mx: 2 }}>
+        <Card sx={{ Width: 250, mx: 2, margin: 2 }}>
             <CardMedia
                 sx={{ height: 140 }}
                 image={card.image.url}

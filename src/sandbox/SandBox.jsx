@@ -2,6 +2,7 @@ import React from 'react'
 import Parent from './providers/Parent'
 import { Navigate } from 'react-router-dom'
 import { useCurrentUser } from '../providers/UserProvider'
+import Counter from './components/Counter'
 
 
 
@@ -14,7 +15,7 @@ function SandBox() {
 
     return (
         <>
-            <Parent />
+            <Counter></Counter>
         </>
     )
 }

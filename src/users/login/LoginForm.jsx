@@ -6,10 +6,12 @@ import axios from 'axios';
 import loginSchema from '../../interfaces/loginScheme';
 import { getUser, setTokenInLocalStorage } from '../../services/localStorageService';
 import { useCurrentUser } from '../../providers/UserProvider';
+import { useNavigate } from 'react-router-dom';
+
 
 function LoginForm() {
     const { setToken, setUser } = useCurrentUser()
-
+    const navigate = useNavigate()
 
     const initialLoginForm = {
         email: "",
@@ -22,10 +24,11 @@ function LoginForm() {
                 "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/login",
                 user
             );
-            console.log(response);
-            setTokenInLocalStorage(response);
+            setTokenInLocalStorage(response.data);
             setToken(response.data)
             setUser(getUser())
+            console.log(getUser());
+            navigate("/")
         }
         catch (err) {
             console.log(err);

@@ -2,9 +2,9 @@ import BCards from '../cards/BCards'
 import { Container, Typography } from '@mui/material';
 import useFetch from '../hooks/useFetch';
 
+const url = import.meta.env.VITE_API_URL;
 function CardsPage() {
-    const { aPIinput } = useFetch("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards")
-
+    const { aPIinput } = useFetch(url)
 
 
 
