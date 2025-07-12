@@ -3,6 +3,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import CallIcon from "@mui/icons-material/Call";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Box, CardActions, IconButton } from "@mui/material";
+import { deleteCard } from "../services/apiCallService";
 function BCardsFooter() {
     return (
         <CardActions
@@ -10,7 +11,7 @@ function BCardsFooter() {
             disableSpacing
         >
             <Box>
-                <IconButton>
+                <IconButton onClick={(card) => deleteCard(card._id)}>
                     <DeleteIcon />
                 </IconButton>
 
