@@ -18,7 +18,6 @@ export const getUser = () => {
         const myToken = getToken();
         return jwtDecode(myToken);
     } catch (err) {
-        return null;
         console.log(err);
 
     }

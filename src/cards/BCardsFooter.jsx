@@ -11,7 +11,7 @@ function BCardsFooter() {
             disableSpacing
         >
             <Box>
-                <IconButton onClick={(card) => deleteCard(card._id)}>
+                <IconButton onClick={deleteCard}>
                     <DeleteIcon />
                 </IconButton>
 
