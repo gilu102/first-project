@@ -2,12 +2,13 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { useState } from "react";
 import { createContext } from "react";
+import { getToken, getUser } from "../services/localStorageService";
 
 const UserContext = createContext();
 
 export default function UserProvider({ children }) {
-    const [user, setUser] = useState();
-    const [token, setToken] = useState();
+    const [user, setUser] = useState(getUser);
+    const [token, setToken] = useState(getToken);
 
     return (
         <UserContext.Provider value={{ user, setUser, token, setToken }}>

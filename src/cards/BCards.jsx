@@ -2,7 +2,7 @@ import BCard from "./BCard";
 
 import { Box, Typography } from "@mui/material";
 
-function BCards({ cards }) {
+function BCards({ cards, toggleLike }) {
 
     if (cards.length === 0) {
 
@@ -24,7 +24,7 @@ function BCards({ cards }) {
 
             {cards.slice(0, 10).map((card) => (
 
-                <BCard key={card._id} card={card} />
+                <BCard key={card._id} card={card} toggleLike={toggleLike} />
 
             ))}
 

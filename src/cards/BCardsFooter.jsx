@@ -4,7 +4,7 @@ import CallIcon from "@mui/icons-material/Call";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Box, CardActions, IconButton } from "@mui/material";
 import { deleteCard } from "../services/apiCallService";
-function BCardsFooter({ card }) {
+function BCardsFooter({ card, toggleLike, cardId }) {
     return (
         <CardActions
             sx={{ display: "flex", justifyContent: "space-between" }}
@@ -26,7 +26,7 @@ function BCardsFooter({ card }) {
                 </IconButton>
 
                 <IconButton>
-                    <FavoriteIcon />
+                    <FavoriteIcon toggleLike={toggleLike} cardId={cardId} />
                 </IconButton>
             </Box>
         </CardActions>
