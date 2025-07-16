@@ -7,8 +7,8 @@ import { getToken, getUser } from "../services/localStorageService";
 const UserContext = createContext();
 
 export default function UserProvider({ children }) {
-    const [user, setUser] = useState(getUser);
-    const [token, setToken] = useState(getToken);
+    const [user, setUser] = useState(getUser());
+    const [token, setToken] = useState(getToken());
 
     return (
         <UserContext.Provider value={{ user, setUser, token, setToken }}>

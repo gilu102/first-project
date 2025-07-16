@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import React, { use } from 'react'
+import React from 'react'
 import { useTheme } from '../../providers/CustomThemeProvider'
 
 function Main({ children }) {
