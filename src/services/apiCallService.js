@@ -8,7 +8,7 @@ const token = getToken()
 export const deleteCard = async (id) => {
     try {
 
-        const { data } = await axios.delete(`${API_BASE}${id}`,);
+        const { data } = await axios.delete(`${API_BASE}${id}`, token);
 
         return data
 

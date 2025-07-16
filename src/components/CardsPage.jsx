@@ -15,8 +15,8 @@ function CardsPage() {
     const toggleLIke = useCallback(
         async (cardId) => {
             try {
-                const response = await axios.patch("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards" + cardId,
-                    {}, { "x-auth-token": token }
+                const response = await axios.patch("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/" + cardId,
+                    {}, { headers: { "x-auth-token": token } }
                 )
             } catch (error) {
                 console.log(error);
