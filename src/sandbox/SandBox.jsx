@@ -1,8 +1,9 @@
 import React from 'react'
-import Parent from './providers/Parent'
 import { Navigate } from 'react-router-dom'
 import { useCurrentUser } from '../providers/UserProvider'
-import Counter from './components/Counter'
+import CountryList from './CountryList'
+import ChromeDinoGame from 'react-chrome-dino'
+import Typography from '@mui/material/Typography'
 
 
 
@@ -15,7 +16,12 @@ function SandBox() {
 
     return (
         <>
-            <Counter></Counter>
+            <Typography variant="h3" color="initial" >welcome to my sand box!</Typography>
+            <CountryList />
+
+            <ChromeDinoGame />
+
+
         </>
     )
 }

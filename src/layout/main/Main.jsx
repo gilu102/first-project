@@ -8,7 +8,7 @@ function Main({ children }) {
     return (
         <>
 
-            <Box sx={{ color: isDark ? "white" : "black", backgroundColor: isDark ? "#333333" : "#e3f2fd", minHeight: "80vh" }}>{children}</Box>
+            <Box sx={{ color: isDark ? "white" : "black", backgroundColor: isDark ? "#333333" : "white", minHeight: "80vh" }}>{children}</Box>
         </>
     )
 }

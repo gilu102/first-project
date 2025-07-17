@@ -17,7 +17,7 @@ function BCard({ card, toggleLike }) {
                 phone={card.phone}
                 city={card.address.city}
             />
-            <BCardsFooter card={card} toggleLike={toggleLike} cardId={card._id} />
+            <BCardsFooter card={card} toggleLike={toggleLike} cardId={card._id} likes={card.likes} />
         </Card>
     );
 }

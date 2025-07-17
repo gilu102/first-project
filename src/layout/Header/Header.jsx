@@ -12,7 +12,7 @@ function Header() {
     console.log(user);
 
     return (
-        <AppBar position="sticky" color="primary" elevation={10}>
+        <AppBar position="sticky" color="primary" elevation={10} sx={{ marginBottom: 3 }}>
             <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Box>
                     <HeaderLink to={ROUTES.root} label={"Home"} />

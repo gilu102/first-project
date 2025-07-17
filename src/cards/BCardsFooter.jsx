@@ -5,10 +5,12 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Box, CardActions, IconButton } from "@mui/material";
 import { deleteCard } from "../services/apiCallService";
 import { useState } from "react";
+import { useCurrentUser } from "../providers/UserProvider";
 
 
 
-function BCardsFooter({ card, toggleLike, cardId }) {
+function BCardsFooter({ card, toggleLike, cardId, likes }) {
+    const { user } = useCurrentUser()
     const [isLike, setIsLike] = useState(likes.includes(user?._id))
 
     return (
@@ -31,8 +33,13 @@ function BCardsFooter({ card, toggleLike, cardId }) {
                     <CallIcon />
                 </IconButton>
 
-                <IconButton color={likes.includes(user?._id) ? "error" : ""} onClick={setIsLike((prev) => !prev)}>
-                    <FavoriteIcon toggleLike={toggleLike} cardId={cardId} />
+                <IconButton
+                    onClick={() => {
+                        setIsLike((prev) => !prev);
+                        toggleLike(cardId);
+                    }}
+                >
+                    <FavoriteIcon color={isLike ? "error" : ""} />
                 </IconButton>
             </Box>
         </CardActions>

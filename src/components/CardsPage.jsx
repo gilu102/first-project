@@ -6,9 +6,10 @@ import axios from 'axios';
 import { useCurrentUser } from '../providers/UserProvider';
 
 const url = import.meta.env.VITE_API_URL;
-const { token } = useCurrentUser()
 
 function CardsPage() {
+    const { token } = useCurrentUser()
+
     const { aPIinput } = useFetch(url)
 
 
