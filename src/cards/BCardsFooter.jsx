@@ -19,7 +19,7 @@ function BCardsFooter({ card, toggleLike, cardId, likes }) {
             disableSpacing
         >
             <Box>
-                <IconButton onClick={() => deleteCard(card._id)}>
+                <IconButton onClick={() => deleteCard(cardId)}>
                     <DeleteIcon />
                 </IconButton>
 

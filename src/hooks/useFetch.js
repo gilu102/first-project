@@ -8,7 +8,7 @@ export default function useFetch(API) {
         try {
             let responses = await axios.get(API);
             setAPIInput(responses.data)
-            console.log(responses + " extracted successfully");
+            console.log(responses ? "cards extracted successfully" : null);
         } catch (err) {
             console.log("error loading data", err);
         }

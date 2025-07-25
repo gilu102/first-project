@@ -19,17 +19,13 @@ function BCards({ cards, toggleLike }) {
     }
 
     return (
-
         <Box sx={{ display: "flex", flexWrap: "wrap", gap: "px" }}>
-
             {cards.slice(0, 10).map((card) => (
-
                 <BCard key={card._id} card={card} toggleLike={toggleLike} />
-
             ))}
-
+            {
+            }
         </Box>
-
     );
 
 }
