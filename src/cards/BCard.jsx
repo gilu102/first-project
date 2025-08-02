@@ -6,7 +6,7 @@ function BCard({ card, toggleLike }) {
     return (
         <Card sx={{ Width: 250, mx: 2, margin: 2 }}>
             <CardMedia
-                sx={{ height: 140 }}
+                sx={{ height: 170 }}
                 image={card.image.url}
                 title="Businees logo"
             />

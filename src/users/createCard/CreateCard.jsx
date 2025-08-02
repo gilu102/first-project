@@ -8,14 +8,13 @@ import {
     largeFieldProps,
     submitSectionStyle,
 } from "../../styles/registerFormStyes";
-import { Button, cardActionAreaClasses, Container, Divider, Grid, TextField, Typography } from "@mui/material";
+import { Button, Container, Grid, TextField, Typography } from "@mui/material";
 import axios from 'axios';
 import { useCurrentUser } from '../../providers/UserProvider';
 import SnackBarProvider from '../../providers/SnackBarProvider';
 
 function CreateCard() {
     const { token } = useCurrentUser()
-    const { showSnackBar } = SnackBarProvider()
 
     const handleSignup = async (cardDetailes) => {
         const cardDetailesForServer = {

@@ -2,7 +2,6 @@ import axios from "axios"
 import { getToken } from "./localStorageService";
 
 const API_BASE = "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/"
-
 const token = getToken()
 
 export const deleteCard = async (id) => {
@@ -26,4 +25,14 @@ export const deleteCard = async (id) => {
     }
 }
 
+export const updateCard = async (id) => {
+    try {
 
+        const response = await axios.put(`${API_BASE}${id}`, 
+            ,
+            { headers: { "x-auth-token": token } });
+    } catch (error) {
+        console.error("Error in deleteCard:", error.response ? error.response.data : error.message);
+        alert(error.response ? error.response.data : error.message)
+    }
+}

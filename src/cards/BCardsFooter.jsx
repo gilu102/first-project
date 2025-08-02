@@ -3,7 +3,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import CallIcon from "@mui/icons-material/Call";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Box, CardActions, IconButton } from "@mui/material";
-import { deleteCard } from "../services/apiCallService";
+import { deleteCard, updateCard } from "../services/apiCallService";
 import { useState } from "react";
 import { useCurrentUser } from "../providers/UserProvider";
 
@@ -23,7 +23,7 @@ function BCardsFooter({ toggleLike, cardId, likes }) {
                     <DeleteIcon />
                 </IconButton>
 
-                <IconButton>
+                <IconButton onClick={updateCard}>
                     <EditIcon />
                 </IconButton>
             </Box>
