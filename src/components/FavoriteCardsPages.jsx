@@ -38,7 +38,7 @@ function FavoriteCardsPages() {
         if (aPIinput && aPIinput.length > 0 && user) {
             setFavoriteCards(aPIinput.filter((c) => c.likes.includes(user._id)))
         }
-    }, [aPIinput, user])
+    }, [aPIinput, user, toggleLike])
 
 
     return (

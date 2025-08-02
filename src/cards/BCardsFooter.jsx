@@ -9,7 +9,7 @@ import { useCurrentUser } from "../providers/UserProvider";
 
 
 
-function BCardsFooter({ card, toggleLike, cardId, likes }) {
+function BCardsFooter({ toggleLike, cardId, likes }) {
     const { user } = useCurrentUser()
     const [isLike, setIsLike] = useState(likes.includes(user?._id))
 

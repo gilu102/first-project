@@ -5,6 +5,7 @@ const ROUTES = {
     myCards: "/my-cards",
     login: "/login",
     register: "/register",
+    createCard: "/create-card",
     sandbox: "/sandbox"
 };
 

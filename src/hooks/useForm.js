@@ -1,49 +1,48 @@
-import { useState } from "react";
-import Joi from "joi";
+import { useState, useCallback, useMemo } from 'react';
+import Joi from 'joi';
 
-
-export default function useForm(onSubmit, initialform, formInitials) {
+export default function useForm(handleForm, initialform, formInitials) {
     const [formDetails, setFormDetails] = useState(formInitials);
     const [errors, setErrors] = useState({});
 
-    const schema = Joi.object(initialform);
+    // Compile the schema once unless the schema definition changes
+    const schema = useMemo(() => Joi.object(initialform), [initialform]);
 
-    const handleChange = (e) => {
-        const fieldName = e.target.name;
-        const fieldValue = e.target.value;
-        setFormDetails((prev) => ({
-            ...prev,
-            [fieldName]: fieldValue,
-        }));
+    const handleChange = useCallback(
+        (e) => {
+            const { name: fieldName, value: fieldValue } = e.target;
+            setFormDetails((prev) => ({
+                ...prev,
+                [fieldName]: fieldValue
+            }));
 
-        const fieldSchema = Joi.object({
-            [fieldName]: initialform[fieldName],
-        });
+            const fieldSchema = Joi.object({ [fieldName]: initialform[fieldName] });
+            const { error } = fieldSchema.validate({ [fieldName]: fieldValue });
+            if (error) {
+                setErrors((prev) => ({
+                    ...prev,
+                    [fieldName]: error.details[0].message
+                }));
+            } else {
+                setErrors((prev) => {
+                    const { [fieldName]: removed, ...rest } = prev;
+                    return rest;
+                });
+            }
+        },
+        [initialform] // depends on validation rules
+    );
 
-        const { error } = fieldSchema.validate({ [fieldName]: fieldValue });
-
-        if (error) {
-            setErrors({ [fieldName]: error.details[0].message });
-        } else {
-            setErrors((prev) => {
-                delete prev[fieldName];
-                return prev;
-            });
-        }
-    };
-
-
-    const handleSubmit = () => {
-        console.log(formDetails);
+    const handleSubmit = useCallback(() => {
         const { error } = schema.validate(formDetails, { abortEarly: false });
-        console.log(error);
-        onSubmit(formDetails)
-    };
+        console.log(formDetails, error);
+        handleForm(formDetails);
+    }, [schema, formDetails, handleForm]);
 
-    function handleCancel() {
+    const handleCancel = useCallback(() => {
         setFormDetails(formInitials);
-        setErrors({})
-    }
+        setErrors({});
+    }, [formInitials]);
 
     return {
         formDetails,

@@ -6,9 +6,6 @@ const API_BASE = "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/"
 const token = getToken()
 
 export const deleteCard = async (id) => {
-    console.log(token);
-    console.log(API_BASE);
-
     const isConfirmed = window.confirm("are you sure you want to delete this card")
     if (isConfirmed) {
         try {
@@ -30,6 +27,3 @@ export const deleteCard = async (id) => {
 }
 
 
-export const getFavoriteCards = async () => {
-
-}

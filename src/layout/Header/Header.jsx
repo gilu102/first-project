@@ -9,7 +9,7 @@ function Header() {
 
     const { isDark, toggleMode } = useTheme()
     const { user } = useCurrentUser()
-    console.log(user);
+
 
     return (
         <AppBar position="sticky" color="primary" elevation={10} sx={{ marginBottom: 3 }}>

@@ -34,7 +34,6 @@ export default function UserProvider({ children }) {
         }
     }, [user, token]);
 
-    console.log(userFullDetails);
 
     return (
         <UserContext.Provider

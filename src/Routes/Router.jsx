@@ -9,6 +9,7 @@ import RegisterPage from "../components/RegisterPage"
 import ErrorPage from '../components/ErrorPage'
 import ROUTES from './routesDict'
 import SandBox from '../sandbox/SandBox'
+import CreateCard from '../users/createCard/CreateCard'
 
 
 
@@ -27,6 +28,8 @@ function Router() {
             <Route path={ROUTES.login} element={<LoginPage />} />
 
             <Route path={ROUTES.register} element={<RegisterPage />} />
+
+            <Route path={ROUTES.createCard} element={<CreateCard />} />
 
             <Route path={ROUTES.sandbox} element={<SandBox />} />
 

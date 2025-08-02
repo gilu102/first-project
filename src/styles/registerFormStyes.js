@@ -2,7 +2,6 @@ export const containerStyle = {
     mt: 6,
     p: 4,
     bgcolor: "#f7fafd",
-    borderRadius: 4,
     boxShadow: 4,
 };
 
@@ -33,5 +32,4 @@ export const submitSectionStyle = {
     mt: 5,
     bgcolor: "#e3f2fd",
     py: 3,
-    borderRadius: 2,
 };
