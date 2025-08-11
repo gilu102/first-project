@@ -6,12 +6,15 @@ import { useCurrentUser } from "../providers/UserProvider";
 export default function useFetch(API) {
     const { token } = useCurrentUser()
     const [aPIinput, setAPIInput] = useState([])
+    const [err, setErr] = useState(null)
     async function getApiFromServer() {
         try {
             let responses = await axios.get(API, { headers: { "x-auth-token": token } });
             setAPIInput(responses.data)
+            setErr(null)
         } catch (err) {
             console.log("error loading data", err);
+            setErr(err)
         }
 
     }
@@ -32,5 +35,5 @@ export default function useFetch(API) {
     useEffect(() => {
         getApiFromServer();
     }, [])
-    return { aPIinput, toggleLike }
+    return { aPIinput, toggleLike, err }
 }

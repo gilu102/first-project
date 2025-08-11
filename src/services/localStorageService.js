@@ -6,7 +6,13 @@ export const setTokenInLocalStorage = (jwtToken) => {
     localStorage.setItem(TOKEN, jwtToken)
 }
 
-export const removeToken = () => localStorage.removeItem(TOKEN)
+export const removeToken = () => {
+    const isConfirmed = window.confirm("are you sure you want to logout?")
+    if (isConfirmed) {
+        localStorage.removeItem(TOKEN)
+    }
+}
+
 
 
 export const getToken = () => {

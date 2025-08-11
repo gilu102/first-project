@@ -8,10 +8,9 @@ export const deleteCard = async (id) => {
     const isConfirmed = window.confirm("are you sure you want to delete this card")
     if (isConfirmed) {
         try {
-
-            const { data } = await axios.delete(`${API_BASE}${id}`, { headers: { "x-auth-token": token } });
-            console.log("card deletion succeed", data);
-            alert("card removed successfully", data)
+            await axios.delete(`${API_BASE}${id}`, { headers: { "x-auth-token": token } });
+            console.log("card deletion succeed");
+            alert("card removed successfully")
             return data
 
 
@@ -25,14 +24,13 @@ export const deleteCard = async (id) => {
     }
 }
 
-export const updateCard = async (id) => {
+export const getCardById = async (id) => {
     try {
+        const response = await axios.get(`${API_BASE}${id}`);
+        console.log(response);
 
-        const response = await axios.put(`${API_BASE}${id}`, 
-            ,
-            { headers: { "x-auth-token": token } });
-    } catch (error) {
-        console.error("Error in deleteCard:", error.response ? error.response.data : error.message);
-        alert(error.response ? error.response.data : error.message)
+    } catch (err) {
+        console.log(err);
+
     }
 }

@@ -11,7 +11,6 @@ import {
 import { Button, Container, Grid, TextField, Typography } from "@mui/material";
 import axios from 'axios';
 import { useCurrentUser } from '../../providers/UserProvider';
-import SnackBarProvider from '../../providers/SnackBarProvider';
 
 function CreateCard() {
     const { token } = useCurrentUser()
