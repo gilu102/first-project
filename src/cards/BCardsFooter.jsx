@@ -7,8 +7,11 @@ import { deleteCard, getCardById } from "../services/apiCallService";
 import { useState } from "react";
 import { useCurrentUser } from "../providers/UserProvider";
 import { useSnackBar } from "../providers/SnackBarProvider";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../Routes/routesDict";
 
 function BCardsFooter({ toggleLike, cardId, likes, cardPhone }) {
+    const navigate = useNavigate()
     const { showSnackBar } = useSnackBar()
     const { user } = useCurrentUser();
     const [isLike, setIsLike] = useState(likes.includes(user?._id));
@@ -19,7 +22,7 @@ function BCardsFooter({ toggleLike, cardId, likes, cardPhone }) {
                 <IconButton onClick={() => deleteCard(cardId)} color="error">
                     <DeleteIcon />
                 </IconButton>
-                <IconButton onClick={() => getCardById(cardId)} color="primary">
+                <IconButton onClick={() => navigate(ROUTES.UpdateCard)} color="primary">
                     <EditIcon />
                 </IconButton>
             </Box>

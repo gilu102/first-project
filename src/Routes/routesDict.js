@@ -1,3 +1,5 @@
+import UpdateCard from "../cards/updateCard/UpdateCardForm";
+
 const ROUTES = {
     root: "/",
     about: "/about",
@@ -6,7 +8,8 @@ const ROUTES = {
     login: "/login",
     register: "/register",
     createCard: "/create-card",
-    sandbox: "/sandbox"
+    sandbox: "/sandbox",
+    UpdateCard: "/update-card"
 };
 
 export default ROUTES;

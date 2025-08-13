@@ -10,6 +10,7 @@ import ErrorPage from '../components/ErrorPage'
 import ROUTES from './routesDict'
 import SandBox from '../sandbox/SandBox'
 import CreateCard from '../users/createCard/CreateCard'
+import UpdateCard from '../cards/updateCard/UpdateCardForm'
 
 
 
@@ -32,6 +33,8 @@ function Router() {
             <Route path={ROUTES.createCard} element={<CreateCard />} />
 
             <Route path={ROUTES.sandbox} element={<SandBox />} />
+
+            <Route path={ROUTES.UpdateCard} element={<UpdateCard />} />
 
 
             <Route path="/*" element={<ErrorPage />} />
