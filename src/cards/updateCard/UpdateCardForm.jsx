@@ -10,11 +10,18 @@ import {
 import { Button, Container, Grid, TextField, Typography } from "@mui/material";
 import axios from 'axios';
 import { useCurrentUser } from '../../providers/UserProvider';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { getCardById } from '../../services/apiCallService.js';
+import { useSnackBar } from '../../providers/SnackBarProvider.jsx';
+import ROUTES from '../../Routes/routesDict.js';
 
 function UpdateCard() {
+    const navigate = useNavigate()
+    const { id } = useParams()
     const { token } = useCurrentUser()
-
-    const handleSignup = async (cardDetailes) => {
+    const { showSnackBar } = useSnackBar()
+    const handleUpdateCard = async (cardDetailes) => {
         const cardDetailesForServer = {
             title: cardDetailes.title,
             subtitle: cardDetailes.subtitle,
@@ -39,12 +46,13 @@ function UpdateCard() {
 
         try {
             const response = await axios.put(
-                `https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/${cardId}`,
+                `https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/${id}`,
                 cardDetailesForServer,
                 { headers: { "x-auth-token": token } }
             );
             console.log(response.data);
-            showSnackBar("card added successfully")
+            showSnackBar("card edited successfully")
+            navigate(ROUTES.myCards)
         } catch (error) {
             console.log(error);
             if (error.response) {
@@ -52,11 +60,36 @@ function UpdateCard() {
             }
         }
     };
-    const { formDetails, errors, handleChange, handleSubmit, handleCancel } = useForm(
-        handleSignup
+    const { formDetails, errors, handleChange, handleSubmit, handleCancel, setFormDetails } = useForm(
+        handleUpdateCard
         , createCardScheme
         , cardDetailes
     );
+    const updateForm = async () => {
+        const c = await getCardById(id)
+
+        setFormDetails({
+            title: c.title,
+            subtitle: c.subtitle,
+            description: c.description,
+            phone: c.phone,
+            email: c.email,
+            web: c.web,
+            url: c.image.url,
+            alt: c.image.alt,
+            state: c.address.state,
+            country: c.address.country,
+            city: c.address.city,
+            street: c.address.street,
+            houseNumber: c.address.houseNumber,
+            zip: c.address.zip,
+        }
+        )
+
+    }
+    useEffect(() => {
+        updateForm()
+    }, [id])
 
     return (
         <Container maxWidth="md" sx={containerStyle}>
@@ -69,7 +102,7 @@ function UpdateCard() {
                 width: "100%",
                 pb: 3
             }}>
-                CREATE CARD
+                update card
             </Typography>
             <form autoComplete="off">
                 <Grid container spacing={3} justifyContent={'center'}>

@@ -22,7 +22,7 @@ function BCardsFooter({ toggleLike, cardId, likes, cardPhone }) {
                 <IconButton onClick={() => deleteCard(cardId)} color="error">
                     <DeleteIcon />
                 </IconButton>
-                <IconButton onClick={() => navigate(ROUTES.UpdateCard)} color="primary">
+                <IconButton onClick={() => navigate(ROUTES.updatecard + cardId)} color="primary">
                     <EditIcon />
                 </IconButton>
             </Box>

@@ -4,6 +4,9 @@ import { useCurrentUser } from "../providers/UserProvider";
 
 
 export default function useFetch(API) {
+
+    const [filSearchInput, setFilSearchInput] = useState([]);
+
     const { token } = useCurrentUser()
     const [aPIinput, setAPIInput] = useState([])
     const [err, setErr] = useState(null)
@@ -17,6 +20,14 @@ export default function useFetch(API) {
             setErr(err)
         }
 
+    }
+
+
+
+
+    function handleChange(event) {
+        setFilSearchInput(aPIinput.filter(input => input.name.common.toLowerCase().includes(event.target.value.toLowerCase().trim())))
+        console.log(event.target.value);
     }
 
     const toggleLike = useCallback(
@@ -35,5 +46,5 @@ export default function useFetch(API) {
     useEffect(() => {
         getApiFromServer();
     }, [])
-    return { aPIinput, toggleLike, err }
+    return { aPIinput, toggleLike, err, handleChange, filSearchInput }
 }

@@ -5,8 +5,10 @@ import HeaderLink from './HeaderLink';
 import { useTheme } from '../../providers/CustomThemeProvider';
 import { useCurrentUser } from '../../providers/UserProvider';
 import { removeToken } from '../../services/localStorageService';
+import useFetch from '../../hooks/useFetch';
 
 function Header() {
+    const { handleChange, filSearchInput } = useFetch()
     const { isDark, toggleMode } = useTheme();
     const { user } = useCurrentUser();
 
@@ -24,9 +26,11 @@ function Header() {
                     <HeaderLink to={ROUTES.root} label="Home" />
                     <HeaderLink to={ROUTES.about} label="About" />
                     <HeaderLink to={ROUTES.favorite} label="Favorite cards" />
+                    <HeaderLink to={ROUTES.myCards} label="my cards" />
                     <HeaderLink to={ROUTES.sandbox} label="Sandbox" />
                 </Box>
                 <Box sx={{ display: 'flex', gap: 1 }}>
+
                     {user ? (
                         <>
                             <Button sx={{

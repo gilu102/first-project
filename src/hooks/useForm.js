@@ -49,6 +49,7 @@ export default function useForm(handleForm, initialform, formInitials) {
         errors,
         handleChange,
         handleSubmit,
-        handleCancel
+        handleCancel,
+        setFormDetails
     };
 }

@@ -34,7 +34,7 @@ function Router() {
 
             <Route path={ROUTES.sandbox} element={<SandBox />} />
 
-            <Route path={ROUTES.UpdateCard} element={<UpdateCard />} />
+            <Route path={ROUTES.updatecard + ":id"} element={<UpdateCard />} />
 
 
             <Route path="/*" element={<ErrorPage />} />

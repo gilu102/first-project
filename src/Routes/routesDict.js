@@ -9,7 +9,7 @@ const ROUTES = {
     register: "/register",
     createCard: "/create-card",
     sandbox: "/sandbox",
-    UpdateCard: "/update-card"
+    updatecard: "/update-card/"
 };
 
 export default ROUTES;
