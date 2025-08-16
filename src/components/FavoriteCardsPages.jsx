@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import useFetch from '../hooks/useFetch'
 import { useCurrentUser } from '../providers/UserProvider'
-import { Container, Typography } from '@mui/material';
+import { Container, TextField, Typography } from '@mui/material';
 import BCards from '../cards/BCards';
 import axios from 'axios';
 const url = import.meta.env.VITE_API_URL;
@@ -9,7 +9,7 @@ const url = import.meta.env.VITE_API_URL;
 
 
 function FavoriteCardsPages() {
-    const { aPIinput } = useFetch(url)
+    const { filSearchInput, handleChange } = useFetch(url)
     const [favoriteCards, setFavoriteCards] = useState([])
     const { user, token } = useCurrentUser()
 
@@ -20,8 +20,6 @@ function FavoriteCardsPages() {
                 const response = await axios.patch("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/" + cardId,
                     {}, { headers: { "x-auth-token": token } },
                 )
-                alert("you removed the card successfully!");
-
                 setFavoriteCards((prev) => {
                     return prev.filter(c => c.id != cardId)
                 })
@@ -35,15 +33,17 @@ function FavoriteCardsPages() {
 
 
     useEffect(() => {
-        if (aPIinput && aPIinput.length > 0 && user) {
-            setFavoriteCards(aPIinput.filter((c) => c.likes.includes(user._id)))
+        if (filSearchInput && filSearchInput.length > 0 && user) {
+            setFavoriteCards(filSearchInput.filter((c) => c.likes.includes(user._id)))
         }
-    }, [aPIinput, user, toggleLike])
+    }, [filSearchInput, user, toggleLike])
 
 
     return (
-        <>      <Container>
-            <Typography variant='h2'>cards page</Typography>
+        <>      <Container sx={{ textAlign: "center" }}>
+            <Typography variant='h2' sx={{ marginBottom: 4 }}>MY FAVORITE</Typography>
+            <TextField id="outlined-basic" label="Outlined" variant="outlined" onChange={handleChange} />
+
             <BCards cards={favoriteCards} toggleLike={toggleLike}></BCards>
         </Container>
         </>

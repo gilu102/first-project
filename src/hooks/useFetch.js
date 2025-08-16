@@ -4,17 +4,15 @@ import { useCurrentUser } from "../providers/UserProvider";
 
 
 export default function useFetch(API) {
-
     const [filSearchInput, setFilSearchInput] = useState([]);
-
-    const { token } = useCurrentUser()
     const [aPIinput, setAPIInput] = useState([])
+    const { token } = useCurrentUser()
     const [err, setErr] = useState(null)
     async function getApiFromServer() {
         try {
             let responses = await axios.get(API, { headers: { "x-auth-token": token } });
             setAPIInput(responses.data)
-            setErr(null)
+            setFilSearchInput(responses.data)
         } catch (err) {
             console.log("error loading data", err);
             setErr(err)
@@ -26,8 +24,16 @@ export default function useFetch(API) {
 
 
     function handleChange(event) {
-        setFilSearchInput(aPIinput.filter(input => input.name.common.toLowerCase().includes(event.target.value.toLowerCase().trim())))
-        console.log(event.target.value);
+        const searchTerm = event.target.value.toLowerCase().trim();
+
+        if (!Array.isArray(aPIinput)) {
+            console.error("aPIinput is not an array!", aPIinput);
+            return;
+        }
+        const filtered = aPIinput.filter((card) =>
+            (card.title || "").toLowerCase().includes(searchTerm)
+        );
+        setFilSearchInput(filtered);
     }
 
     const toggleLike = useCallback(

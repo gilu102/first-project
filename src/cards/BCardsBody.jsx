@@ -16,7 +16,7 @@ function BCardsBody({ title, subtitle, phone, city, bizNumber, web }) {
             <Typography variant="body2">
                 📍 <strong>{city}</strong>
             </Typography>
-            <Link href={web} variant="body2" color="inherit"> go to our website her</Link>
+            <Link href={web} variant="body2" color="inherit"> go to our website here</Link>
             <Typography variant="caption" display="block" color="text.secondary" mt={1}>
                 Card #{bizNumber}
             </Typography>
