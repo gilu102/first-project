@@ -41,7 +41,7 @@ function FavoriteCardsPages() {
 
     return (
         <>      <Container sx={{ textAlign: "center" }}>
-            <Typography variant='h2' sx={{ marginBottom: 4 }}>MY FAVORITE</Typography>
+            <Typography variant='h2' sx={{ marginBottom: 4 }}>favorites</Typography>
             <TextField id="outlined-basic" label="Outlined" variant="outlined" onChange={handleChange} />
 
             <BCards cards={favoriteCards} toggleLike={toggleLike}></BCards>

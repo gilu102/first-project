@@ -17,7 +17,7 @@ function CardsPage() {
 
 
         <Container sx={{ textAlign: 'center' }}>
-            <Typography variant='h2' sx={{ marginBottom: 4 }}>cards page</Typography>
+            <Typography variant='h2' sx={{ marginBottom: 4 }}>home</Typography>
             <TextField id="outlined-basic" label="Outlined" variant="outlined" onChange={handleChange} />
             <BCards cards={filSearchInput} toggleLike={toggleLike}></BCards>
         </Container>

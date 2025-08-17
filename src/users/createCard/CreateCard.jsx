@@ -70,7 +70,7 @@ function CreateCard() {
                 width: "100%",
                 pb: 3
             }}>
-                CREATE CARD
+                create card
             </Typography>
             <form autoComplete="off">
                 <Grid container spacing={3} justifyContent={'center'}>
@@ -204,6 +204,7 @@ function CreateCard() {
                         borderColor: 'rgba(0, 0, 0, 0.3)',
                         width: "100%",
                         pb: 3
+                        , marginTop: 3
                     }}>
                         CARD ADDRESS
                     </Typography>

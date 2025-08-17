@@ -16,8 +16,8 @@ function BCardsFooter({ toggleLike, cardId, likes, cardPhone }) {
     const { user } = useCurrentUser();
     const [isLike, setIsLike] = useState(likes.includes(user?._id));
 
-    return (
-        <CardActions sx={{ display: "flex", justifyContent: "space-between", px: 2, pb: 2 }}>
+    if (user.isAdmin) {
+        return (<CardActions sx={{ display: "flex", justifyContent: "space-between", px: 2, pb: 2 }}>
             <Box>
                 <IconButton onClick={() => deleteCard(cardId)} color="error">
                     <DeleteIcon />
@@ -39,6 +39,38 @@ function BCardsFooter({ toggleLike, cardId, likes, cardPhone }) {
                     <FavoriteIcon color={isLike ? "error" : "inherit"} />
                 </IconButton>
             </Box>
+        </CardActions>)
+    } else if (user.isBusiness || user) {
+        return (
+            <CardActions sx={{ display: "flex", justifyContent: "space-between", px: 2, pb: 2 }}>
+                <Box>
+                    <IconButton color="success" onClick={() => showSnackBar(`${cardPhone}`, 'success')}>
+                        <CallIcon />
+                    </IconButton>
+                </Box>
+                <Box>
+                    <IconButton
+                        onClick={() => {
+                            setIsLike((prev) => !prev);
+                            toggleLike(cardId);
+                        }}
+                    >
+                        <FavoriteIcon color={isLike ? "error" : "inherit"} />
+                    </IconButton>
+                </Box>
+            </CardActions>)
+    }
+
+
+
+
+    return (
+        <CardActions sx={{ display: "flex", justifyContent: "center", px: 2, pb: 2 }}>
+
+            <IconButton color="success" onClick={() => showSnackBar(`${cardPhone}`, 'success')}>
+                <CallIcon />
+            </IconButton>
+
         </CardActions>
     );
 }

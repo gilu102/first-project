@@ -8,12 +8,14 @@ import { removeToken } from '../../services/localStorageService';
 import { removeButton } from '../../styles/buttonsStyle';
 
 function Header() {
+
     const { isDark, toggleMode } = useTheme();
     const { user } = useCurrentUser();
     if (user.isAdmin) {
         return (
             <AppBar
                 position="sticky"
+                color="transparent"
                 sx={{
                     backgroundColor: '#2ecc71',
                     paddingY: 1.5,

@@ -14,8 +14,8 @@ function MyCardsPage() {
 
     return (
         <>
-            <Container Container sx={{ textAlign: 'center' }}>
-                <Typography variant='h2' sx={{ marginBottom: 4 }}>MY CARDS</Typography>
+            <Container sx={{ textAlign: 'center' }}>
+                <Typography variant='h2' sx={{ marginBottom: 4 }}>my cards</Typography>
                 <TextField id="outlined-basic" label="Outlined" variant="outlined" onChange={handleChange} />
 
 

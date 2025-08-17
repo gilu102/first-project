@@ -3,6 +3,7 @@ import { Container, Grid, Typography, Card, CardContent, Button, Box } from '@mu
 import { styled } from '@mui/system';
 import UserProvider, { useCurrentUser } from '../providers/UserProvider';
 import ROUTES from '../Routes/routesDict';
+import { useNavigate } from 'react-router-dom';
 
 const StyledCard = styled(Card)(({ theme }) => ({
     maxWidth: 345,
@@ -15,6 +16,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
 }));
 
 const AboutPage = () => {
+    const navigate = useNavigate()
     const { user } = useCurrentUser()
     return (
         <Container maxWidth="md">
@@ -79,7 +81,8 @@ const AboutPage = () => {
                     networking. Start using **Gil Business Card Application** today to organize, share, and manage
                     your contacts like never before.
                 </Typography>
-                <Button variant="contained" color="secondary" size="large" href={user ? ROUTES.createCard : ROUTES.login}>
+                <Button variant="contained" color="secondary" size="large"
+                    onClick={() => navigate(user ? ROUTES.createCard : ROUTES.login)}>
                     Create Your Digital Card
                 </Button>
             </Box>
