@@ -50,7 +50,6 @@ function UpdateCard() {
                 cardDetailesForServer,
                 { headers: { "x-auth-token": token } }
             );
-            console.log(response.data);
             showSnackBar("card edited successfully")
             navigate(ROUTES.myCards)
         } catch (error) {
